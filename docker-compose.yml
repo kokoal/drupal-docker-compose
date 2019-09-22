@@ -1,0 +1,44 @@
+version: '3'
+
+networks:
+  proxy:
+    external: true
+  internal:
+    external: false
+
+services:
+  drupal:
+    build:
+      context: ./docker/drupal-php
+      args:
+        drupal_version: 8.7
+    container_name: drupal_${PROJECT_NAME}
+    volumes:
+      - app:/var/www/html
+      - ./modules:/var/www/html/modules
+      - ./profiles:/var/www/html/profiles
+      - ./themes:/var/www/html/themes
+    networks:
+      - internal
+
+  server:
+    build: 
+      context: ./docker/nginx
+      args:
+        nginx_version: 1.17
+    container_name: server_${PROJECT_NAME}
+    volumes:
+      - app:/var/www/html
+    depends_on:
+      - drupal
+    labels:
+      - traefik.backend=server_${PROJECT_NAME}
+      - traefik.frontend.rule=Host:www.${PROJECT_NAME}.loc
+      - traefik.docker.network=proxy
+      - traefik.port=80
+    networks:
+      - internal
+      - proxy
+
+volumes:
+  app:
