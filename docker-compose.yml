@@ -11,13 +11,20 @@ services:
     build:
       context: ./docker/drupal-php
       args:
-        drupal_version: 8.7
+        drupal_version: ${DRUPAL_VERSION}
     container_name: drupal_${PROJECT_NAME}
     volumes:
       - app:/var/www/html
       - ./modules:/var/www/html/modules
       - ./profiles:/var/www/html/profiles
       - ./themes:/var/www/html/themes
+      - ./config:/var/www/html/config
+      - ./composer.json:/var/www/html/composer.json
+      - ./composer.lock:/var/www/html/composer.lock
+    depends_on:
+      - database
+    labels:
+      - traefik.enable=false
     networks:
       - internal
 
@@ -25,7 +32,7 @@ services:
     build: 
       context: ./docker/nginx
       args:
-        nginx_version: 1.17
+        nginx_version: ${NGINX_VERSION}
     container_name: server_${PROJECT_NAME}
     volumes:
       - app:/var/www/html
@@ -40,5 +47,20 @@ services:
       - internal
       - proxy
 
+  database:
+    image: mysql:${DATABASE_VERSION}
+    container_name: database_${PROJECT_NAME}
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+     - db-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+    labels:
+      - traefik.enable=false
+    networks:
+      - internal
+
 volumes:
   app:
+  db-data:
