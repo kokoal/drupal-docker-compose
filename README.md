@@ -1,8 +1,13 @@
 # Drupal docker-compose
 A docker-compose and tools to fast launch a Drupal project.
 
+## Requirements
+- Docker is installed and running
+- Traefik is installed and running
+- Docker compose is installed
+
 ## Set up environment variables
-* Before doing annything you need to change environment variables as you wish
+- Before doing annything you need to change environment variables as you wish
 
 Variable | Definition
 ------------ | -------------
@@ -20,3 +25,7 @@ DATABASE_ROOT_PASSWORD | The root database password.
 
 ## Drupal installation
 ### Configure your database connection
+
+## Tested with
+- Docker 18.06.0-ce
+- Traefk in a different container
