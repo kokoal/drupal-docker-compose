@@ -19,7 +19,8 @@ DATABASE_NAME | The future first Drupal databse name.
 DATABASE_ROOT_PASSWORD | The root database password. 
 
 ## Use the pre-launching script
-
+- Run the pre-launcher to set up all files and folder necessary to Drupal development :
+```bash ./install/pre-launching.sh```
 
 ## Launch your Drupal app
 
