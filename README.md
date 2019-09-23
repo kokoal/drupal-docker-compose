@@ -24,8 +24,27 @@ DATABASE_ROOT_PASSWORD | The root database password.
 
 ## Launch your Drupal app
 
-## Drupal installation
+## Drupal installation (Follow the official  core/INSTALL.txt)
+### Prepare Drupal install from recommandation
+```
+mkdir sites/default/files
+chmod a+w sites/default
+chmod a+w sites/default/files
+cp sites/default/default.settings.php sites/default/settings.php
+chmod a+w sites/default/settings.php
+```
+Then run website to start install.
+
 ### Configure your database connection
+
+### Secure your app
+- Change rights according to the Drupal install recommandations.
+
+```
+chmod go-w sites/default/settings.php
+chmod go-w sites/default
+```
+
 
 ## Tested with
 - Docker 18.06.0-ce
