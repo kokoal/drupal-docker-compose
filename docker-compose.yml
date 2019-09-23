@@ -11,14 +11,14 @@ services:
     build:
       context: ./docker/drupal-php
       args:
-        drupal_version: ${DRUPAL_VERSION}
+        DRUPAL_VERSION: ${DRUPAL_VERSION}
     container_name: drupal_${PROJECT_NAME}
     volumes:
       - app:/var/www/html
       - ./modules:/var/www/html/modules
       - ./profiles:/var/www/html/profiles
       - ./themes:/var/www/html/themes
-      - ./config:/var/www/html/config
+      - ./sites:/var/www/html/sites
       - ./composer.json:/var/www/html/composer.json
       - ./composer.lock:/var/www/html/composer.lock
     depends_on:
@@ -32,7 +32,7 @@ services:
     build: 
       context: ./docker/nginx
       args:
-        nginx_version: ${NGINX_VERSION}
+        NGINX_VERSION: ${NGINX_VERSION}
     container_name: server_${PROJECT_NAME}
     volumes:
       - app:/var/www/html

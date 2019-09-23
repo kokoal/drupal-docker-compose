@@ -1,6 +1,6 @@
-ARG nginx_version
+ARG NGINX_VERSION
 
-FROM nginx:$nginx_version
+FROM nginx:${NGINX_VERSION}
 
 COPY site.conf /etc/nginx/conf.d/default.conf
 

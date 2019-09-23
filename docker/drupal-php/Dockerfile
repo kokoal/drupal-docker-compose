@@ -1,6 +1,6 @@
-ARG drupal_version
+ARG DRUPAL_VERSION
 
-FROM drupal:$drupal_version-fpm
+FROM drupal:${DRUPAL_VERSION}-fpm
 
 # Install git
 RUN apt-get update \
