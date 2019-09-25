@@ -30,12 +30,13 @@ services:
 
   server:
     build: 
-      context: ./docker/nginx
+      context: ./docker/apache
       args:
-        NGINX_VERSION: ${SERVER_VERSION}
+        APACHE_VERSION: ${SERVER_VERSION}
     container_name: server_${PROJECT_NAME}
     volumes:
-      - app:/var/www/html
+      - app:/usr/local/apache2/htdocs/
+      - ./.htaccess:/usr/local/apache2/htdocs/.htaccess
     depends_on:
       - drupal
     labels:
