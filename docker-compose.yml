@@ -32,7 +32,7 @@ services:
     build: 
       context: ./docker/nginx
       args:
-        NGINX_VERSION: ${NGINX_VERSION}
+        NGINX_VERSION: ${SERVER_VERSION}
     container_name: server_${PROJECT_NAME}
     volumes:
       - app:/var/www/html
