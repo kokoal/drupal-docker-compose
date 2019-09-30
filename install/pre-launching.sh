@@ -51,6 +51,7 @@ cp -R ${drupal_tmp_folder_name}/sites ./;
 # Get shared files
 cp ${drupal_tmp_folder_name}/robots.txt ./robots.txt;
 cp ${drupal_tmp_folder_name}/web.config ./web.config;
+cp ${drupal_tmp_folder_name}/.htaccess ./.htaccess;
 
 rm -rf tmp_drupal;
 
