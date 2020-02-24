@@ -1,17 +1,20 @@
 #!/bin/bash
 
+# Get Drupal version from local .env file.
+eval "$(grep ^DRUPAL_VERSION= .env)"
+
 # Set up drupal version delimiter
 drupal_version_delimiter=".";
 # Set up the Drupal maximum version number
 drupal_max_version_number=3;
-# Get Drupal git repository from ${DRUPAL_VERSION}
+# Get Drupal git repository from $DRUPAL_VERSION
 # Split version
-IFS=${drupal_version_delimiter} read -ra split_version <<< "${DRUPAL_VERSION}";
+IFS=${drupal_version_delimiter} read -ra split_version <<< "$DRUPAL_VERSION";
 # Get version length
 version_size=${#split_version[@]};
 # Get git representing version. Exemple : 8.x, 8.7.x, 8.7.4 
 drupal_git_version=${split_version[0]};
-for (( i=1; i<${version_size}; i++ ));
+for (( i=1; i<version_size; i++ ));
 do
     drupal_git_version="${drupal_git_version}${drupal_version_delimiter}${split_version[$i]}";
 done

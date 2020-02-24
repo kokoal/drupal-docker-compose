@@ -4,6 +4,7 @@ A docker-compose and tools to fast launch a Drupal project.
 ## Requirements
 - Docker is installed and running
 - Traefik is installed and running
+- You have a network named `proxy` and you have set traefik up in it
 - Docker compose is installed
 
 ## Set up environment variables
@@ -11,9 +12,9 @@ A docker-compose and tools to fast launch a Drupal project.
 
 Variable | Definition
 ------------ | -------------
-PROJECT_NAME | The project name will be used to name containers and set up a domain name with traefik. (Domain name example : www.test.loc with PROJECT_NAME=test).
+PROJECT_NAME | The project name will be used to name containers and set up a domain name with traefik. (Domain name example : www.test.localhost with PROJECT_NAME=test).
 DRUPAL_VERSION | Wanted Drupal version (Examples : 8, 8.7, 8.7.7).
-NGINX_VERSION | Wanted NGINX version if you are using nginx.
+SERVER_VERSION | Wanted Server version.
 DATABASE_VERSION | The database version number.
 DATABASE_NAME | The future first Drupal databse name.
 DATABASE_ROOT_PASSWORD | The root database password. 
@@ -48,4 +49,4 @@ chmod go-w sites/default
 
 ## Tested with
 - Docker 18.06.0-ce
-- Traefk in a different container
+- Traefk in a different container (version : 2.1.4)

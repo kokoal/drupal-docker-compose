@@ -40,10 +40,9 @@ services:
     depends_on:
       - drupal
     labels:
-      - traefik.backend=server_${PROJECT_NAME}
-      - traefik.frontend.rule=Host:www.${PROJECT_NAME}.loc
+      - traefik.http.routers.server-${PROJECT_NAME}.rule=Host(`www.${PROJECT_NAME}.localhost`)
       - traefik.docker.network=proxy
-      - traefik.port=80
+      - traefik.http.services.server-${PROJECT_NAME}.loadbalancer.server.port=80
     networks:
       - internal
       - proxy
