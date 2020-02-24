@@ -1,3 +1,5 @@
+Disclaimer: Drupal shouldn't be running with nginx, to much to correct.
+
 # Drupal docker-compose
 A docker-compose and tools to fast launch a Drupal project.
 
