@@ -12,7 +12,7 @@ A docker-compose and tools to fast launch a Drupal project.
 
 Variable | Definition
 ------------ | -------------
-PROJECT_NAME | The project name will be used to name containers and set up a domain name with traefik. (Domain name example : www.test.localhost with PROJECT_NAME=test).
+COMPOSE_PROJECT_NAME | The project name will be used to name containers and set up a domain name with traefik. (Domain name example : www.test.localhost with PROJECT_NAME=test).
 DRUPAL_VERSION | Wanted Drupal version (Examples : 8, 8.7, 8.7.7).
 SERVER_VERSION | Wanted Server version.
 DATABASE_VERSION | The database version number.
