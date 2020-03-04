@@ -1,4 +1,10 @@
-version: '3'
+version: "3.3"
+
+volumes:
+  db-data:
+  core:
+  vendor:
+
 
 networks:
   proxy:
@@ -13,7 +19,8 @@ services:
       args:
         DRUPAL_VERSION: ${DRUPAL_VERSION}
     volumes:
-      - app:/var/www/html
+      - core:/var/www/html/core
+      - vendor:/var/www/html/vendor
       - ./modules:/var/www/html/modules
       - ./profiles:/var/www/html/profiles
       - ./themes:/var/www/html/themes
@@ -33,7 +40,11 @@ services:
       args:
         APACHE_VERSION: ${SERVER_VERSION}
     volumes:
-      - app:/usr/local/apache2/htdocs/
+      - core:/usr/local/apache2/htdocs/core
+      - vendor:/usr/local/apache2/htdocs/vendor
+      - ./sites:/usr/local/apache2/htdocs/sites
+      - ./themes:/usr/local/apache2/htdocs/themes
+      - ./modules:/var/www/html/modules
       - ./.htaccess:/usr/local/apache2/htdocs/.htaccess
     depends_on:
       - drupal
@@ -57,7 +68,3 @@ services:
       - traefik.enable=false
     networks:
       - internal
-
-volumes:
-  app:
-  db-data:
