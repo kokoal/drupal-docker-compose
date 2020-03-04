@@ -12,7 +12,6 @@ services:
       context: ./docker/drupal-php
       args:
         DRUPAL_VERSION: ${DRUPAL_VERSION}
-    container_name: drupal_${PROJECT_NAME}
     volumes:
       - app:/var/www/html
       - ./modules:/var/www/html/modules
@@ -33,23 +32,21 @@ services:
       context: ./docker/apache
       args:
         APACHE_VERSION: ${SERVER_VERSION}
-    container_name: server_${PROJECT_NAME}
     volumes:
       - app:/usr/local/apache2/htdocs/
       - ./.htaccess:/usr/local/apache2/htdocs/.htaccess
     depends_on:
       - drupal
     labels:
-      - traefik.http.routers.server-${PROJECT_NAME}.rule=Host(`www.${PROJECT_NAME}.localhost`)
+      - traefik.http.routers.server-${COMPOSE_PROJECT_NAME}.rule=Host(`www.${COMPOSE_PROJECT_NAME}.localhost`)
       - traefik.docker.network=proxy
-      - traefik.http.services.server-${PROJECT_NAME}.loadbalancer.server.port=80
+      - traefik.http.services.server-${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=80
     networks:
       - internal
       - proxy
 
   database:
     image: mysql:${DATABASE_VERSION}
-    container_name: database_${PROJECT_NAME}
     command: --default-authentication-plugin=mysql_native_password
     volumes:
      - db-data:/var/lib/mysql
